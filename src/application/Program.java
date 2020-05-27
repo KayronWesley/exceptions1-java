@@ -1,5 +1,5 @@
 /** This is a little study about EXPECTIONS
- * in this example we have a VERY BAD SOLUTION
+ * in this example we have a BAD SOLUTION
  * to resolve the exception
 **/
 
@@ -19,39 +19,29 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		
-		System.out.println("*****************************************************************");
-		System.out.println("******                    WELCOME                           *****");
-		System.out.println("*****************************************************************");
-		System.out.println("");
 		System.out.println("Enter Room Number: ");
 		int roomNumber = sc.nextInt();
 		System.out.println("Enter Check-in date (dd/MM/yyyy): ");
 		Date checkin = sdf.parse(sc.next());
 		System.out.println("Enter Check-out date (dd/MM/yyyy); ");
 		Date checkout = sdf.parse(sc.next());
+		Reservation reservation = new Reservation(roomNumber, checkin, checkout);
+		System.out.println("Reservation: " + reservation);
+		System.out.println("Reservation Update " );
+		System.out.println("Enter Check-in date (dd/MM/yyyy): ");
+		checkin = sdf.parse(sc.next());
+		System.out.println("Enter Check-out date (dd/MM/yyyy); ");
+		checkout = sdf.parse(sc.next());
 		
-		Date now = new Date();
+		String error = reservation.updateDates(checkin, checkout);
 		
-		if(checkin.before(now)){
-			System.out.println("Reservation Error: Date must be future day");
+		if (error != null) {
+			System.out.println("Reservation Error: " + error);
 		}
-		
-		else if(!checkout.after(checkin)) {
-			System.out.println("Reservation Error: Check-out date must be after Check-in date");
-		}
-		
 		else {
-			Reservation reservation = new Reservation(roomNumber, checkin, checkout);
-			System.out.println("Reservation: " + reservation);
-			System.out.println("RESERVATION SUCCESSFUL");
-			System.out.println("*****************************************************************");
-			
-			
+		System.out.println("Reservation: " + reservation);
+		System.out.println("RESERVATION SUCCESSFUL");
 		}
-		
-		
-		
-		
 		sc.close();
 	}
 
